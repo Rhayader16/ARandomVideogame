@@ -11,30 +11,33 @@
     <title>A Random Videogame</title>
   </head>
   <body>
-    <div id="game-container">
+    <section id="start-screen">
+      <button id="start">Start</button>
+    </section>
+    <div id="game-container" class="hidden">
       <div id="timer">
         <span id="minutes">00</span>:<span id="seconds">00</span>
       </div>
-
-      <div id="background">
-        <img src="./Placeholder Image.jpg" alt="the background placeholder" />
-      </div>
-      <div id="riddle">
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet vero
-          adipisci fuga, optio labore possimus
-        </p>
-        <div class="answer">
-          <input id="text-input" type="text" />
-          <input id="submit-button" type="button" value="submit" />
+      <div id="bottom-content">
+        <div id="question">
+          <div id="riddle">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet
+              vero adipisci fuga, optio labore possimus
+            </p>
+            <div class="answer">
+              <input id="text-input" type="text" />
+              <input id="submit-button" type="button" value="submit" />
+            </div>
+          </div>
         </div>
-      </div>
-      <div id="character">
+        <!-- <div id="character"> -->
         <img
-          id="cristodiddio"
+          id="chrImg"
           src="./Yalena_Yardeen.jpg"
           alt="character placeholder"
         />
+        <!-- </div> -->
       </div>
     </div>
   </body>

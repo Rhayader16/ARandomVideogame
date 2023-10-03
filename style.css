@@ -16,10 +16,14 @@ body {
   color: #e2fcefff;
   font-size: large;
 }
+.hidden {
+  display: none !important;
+}
 
 #timer {
   font-size: 2em;
   margin: 20px;
+  width: 120px;
   background-color: #e2fcefff;
   color: #170f11ff;
 }
@@ -29,19 +33,38 @@ body {
   width: 500px;
 }
 
-/*#character {
-  display: flex;
-  max-width: 10%;
+#chrImg {
+  flex: 2;
+  max-width: 13%;
+  /* width: 120px; */
   border: 2px, solid, #5c164eff;
 }
 
-#cristodiddio {
+/* #cristodiddio {
   flex: 1;
-}*/
-
+} */
 #game-container {
   display: flex;
   flex-wrap: wrap;
-  max-height: 600px;
-  max-width: 800px;
+  flex-direction: column;
+  height: 80vh;
+  background-image: url("./Placeholder\ Image.jpg");
+  background-size: auto;
+  background-repeat: no-repeat;
+  margin: auto;
+  justify-content: space-between;
+}
+
+#bottom-content {
+  max-width: 68%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+#question {
+  flex: 4;
+  justify-content: flex-end;
+  max-width: 100%;
 }
