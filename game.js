@@ -34,6 +34,7 @@ class Game {
   stopTimer() {
     clearInterval(this.timerInterval);
   }
+
   //   displayRandomRiddle(category) {
   //     const randomIndex = Math.floor(
   //       Math.random() * this.riddle[category].length
@@ -93,14 +94,17 @@ class Game {
     }
   }
   endGame() {
+    const dialog = document.getElementById("dialog");
     if (this.correctAnswer === 9) {
-      console.log("You won, here's a cookie (because the cake is a lie)");
-      this.stopTimer;
+      dialog.querySelector("h2").textContent =
+        "You won, here's a cookie (because the cake is a lie)";
+      this.stopTimer();
     } else {
       this.gameOver = true;
-      console.log("You lost, GLaDOS got you!");
-      this.stopTimer;
+      dialog.querySelector("h2").textContent = "You lost, GLaDOS got you!";
+      this.stopTimer();
     }
+    dialog.showModal();
   }
 
   theEasterEgg() {} //I'm probably not gonna do this!

@@ -122,6 +122,7 @@ startButton.addEventListener("click", () => {
   game = new Game(riddles);
   game.randomize();
   game.displayRiddle();
+  game.startTimer();
   //   game.displayRandomRiddle("sciFi");
 });
 
