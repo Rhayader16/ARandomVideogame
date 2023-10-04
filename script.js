@@ -19,7 +19,7 @@ const riddles = {
     {
       title: "SF4",
       riddle: `I'm a green giant known for smashing things. When I get angry, watch out! I'm a part of the Marvel superhero team. Who am I?`,
-      answer: "The Hulk",
+      answer: "Hulk",
     },
     {
       title: "SF5",
@@ -122,14 +122,23 @@ startButton.addEventListener("click", () => {
   game = new Game(riddles);
   game.randomize();
   game.displayRiddle();
+  //   game.displayRandomRiddle("sciFi");
 });
 
 submitButton.addEventListener("click", () => {
   const submittedSolution = submitText.value;
   if (game.correctAns(submittedSolution)) {
-    game.solved++;
-    game.displayRiddle();
+    game.nextLevel();
     console.log("won");
     submitText.value = "";
+  }
+
+  function displayTimer() {
+    const timerElement = document.getElementById("timer");
+    timerElement.textContent = formatTime(game.timer);
+  }
+  function startGame() {
+    displayRiddle();
+    game.startTimer();
   }
 });
