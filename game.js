@@ -31,7 +31,9 @@ class Game {
       document.getElementById("timer").textContent = formatTime(this.timer);
     }, 1000);
   }
-
+  stopTimer() {
+    clearInterval(this.timerInterval);
+  }
   //   displayRandomRiddle(category) {
   //     const randomIndex = Math.floor(
   //       Math.random() * this.riddle[category].length
@@ -93,11 +95,11 @@ class Game {
   endGame() {
     if (this.correctAnswer === 9) {
       console.log("You won, here's a cookie (because the cake is a lie)");
-      clearInterval();
+      this.stopTimer;
     } else {
       this.gameOver = true;
       console.log("You lost, GLaDOS got you!");
-      clearInterval();
+      this.stopTimer;
     }
   }
 
