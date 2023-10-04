@@ -10,6 +10,7 @@ class Game {
     this.timer = 120;
     this.timeInterval = null;
     this.categories = ["sciFi", "space", "history"];
+    this.gameOver = false;
     //this.consecAns = 0;
     console.log(this.riddle[this.categories[this.currentLevel]][this.solved]);
   }
@@ -89,8 +90,23 @@ class Game {
       this.displayRiddle();
     }
   }
+  endGame() {
+    if (this.correctAnswer === 9) {
+      console.log("You won, here's a cookie (because the cake is a lie)");
+    } else {
+      this.gameOver = true;
+      console.log("You lost, GLaDOS got you!");
+    }
+  }
 
   theEasterEgg() {} //I'm probably not gonna do this!
+}
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+  return `${formattedMinutes}:${formattedSeconds}`;
 }
 
 export default Game;
