@@ -93,9 +93,11 @@ class Game {
   endGame() {
     if (this.correctAnswer === 9) {
       console.log("You won, here's a cookie (because the cake is a lie)");
+      clearInterval();
     } else {
       this.gameOver = true;
       console.log("You lost, GLaDOS got you!");
+      clearInterval();
     }
   }
 
