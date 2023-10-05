@@ -5,15 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100;400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Pixelify+Sans:wght@400;500;600;700&family=Roboto:wght@100;400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
     </style>
     <link rel="stylesheet" href="./style.css" />
     <script type="module" src="./script.js"></script>
-    <title>A Random Videogame</title>
+    <title>Cyberpunk Trivia Escape</title>
   </head>
   <body>
     <section id="start-screen">
+      <img id="titleimg" src="./Title.jpeg" alt="A view of a futuristic city" />
       <button id="start">Start</button>
+      <audio id="background-audio" autoplay volume="0" loop>
+        <source src="./soundtrack.mp3" type="audio/mpeg" />
+        Il tuo browser non supporta l'audio HTML5.
+      </audio>
+      <audio id="button-sound">
+        <source src="./Button.mp3" type="audio/mpeg" />
+        Il tuo browser non supporta l'audio HTML5.
+      </audio>
+      <audio id="footsteps-sound">
+        <source src="./Walk.mp3" type="audio/mpeg" />
+        Il tuo browser non supporta l'audio HTML5.
+      </audio>
     </section>
+    <dialog id="storyline">
+      <p></p>
+      <button id="next">Next</button>
+    </dialog>
     <div id="game-container" class="hidden">
       <div id="timer">
         <span id="minutes">00</span>:<span id="seconds">00</span>
@@ -27,16 +45,13 @@
             </p>
             <div class="answer">
               <input id="text-input" type="text" />
-              <input id="submit-button" type="button" value="submit" />
+              <br />
+              <input id="submit-button" type="button" value="Submit" />
             </div>
           </div>
         </div>
         <!-- <div id="character"> -->
-        <img
-          id="chrImg"
-          src="./Yalena_Yardeen.jpg"
-          alt="character placeholder"
-        />
+        <img id="chrImg" src="./chr.png" alt="Male android" />
         <!-- </div> -->
       </div>
     </div>

@@ -4,6 +4,7 @@
 --palatinate: #5c164eff;
 --plum: #9b287bff;
 --honeydew: #e2fcefff;
+--start : #13e9f3ff;
 */
 
 * {
@@ -21,51 +22,118 @@ body {
   display: none !important;
 }
 
+#start {
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  background-color: #13e9f3ff;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: larger;
+  width: 10vw;
+  height: 3vw;
+  border: none;
+  transform: translateX(-50%);
+}
+
+#start:hover {
+  box-shadow: 0px 1px 14px 13px #9b287bff;
+  color: #e2fcefff;
+}
+
+#titleimg {
+  max-width: 45vw;
+  position: relative;
+}
+
 #timer {
   font-size: 2em;
   margin: 20px;
   width: 120px;
-  background-color: #e2fcefff;
-  color: #170f11ff;
+  color: #e2fcefff;
+  background-color: #170f11ff;
 }
 
 #text-input {
-  height: 35px;
+  border: 1px solid black;
+  height: 3vw;
   width: 500px;
+  background-color: #e2fcefff;
+  margin-bottom: 10px;
+  padding: 0 20px;
+  font-family: "Space Grotesk" sans-serif;
+  font-size: large;
+}
+
+#text-input:focus {
+  outline: none;
 }
 
 #chrImg {
   flex: 2;
-  max-width: 13%;
-  /* width: 120px; */
-  border: 2px, solid, #5c164eff;
+  max-width: 15%;
+  border: 3px solid #5c164eff;
+  border-radius: 5px;
 }
 
-/* #cristodiddio {
-  flex: 1;
-} */
 #game-container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 80vh;
-  background-image: url("./Placeholder\ Image.jpg");
-  background-size: auto;
+  height: 100vh;
+  background-image: url("./scifidoor.jpeg");
+  background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
   margin: auto;
   justify-content: space-between;
 }
 
 #bottom-content {
-  max-width: 68%;
+  max-width: 90vw;
+  background-color: #170f1190;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-bottom: 10px;
+  padding: 20px 40px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 #question {
   flex: 4;
+  padding-top: 100px;
   justify-content: flex-end;
   max-width: 100%;
+}
+
+#submit-button {
+  background-color: #13e9f3ff;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: larger;
+  width: 10vw;
+  height: 3vw;
+  border: 1px solid black;
+}
+#submit-button:hover {
+  color: #e2fcefff;
+  background-color: aqua;
+}
+dialog {
+  color: #e2fcefff;
+  background-color: #170f11ff;
+  border-radius: 5px;
+  max-width: 80vw;
+}
+#next {
+  background-color: #13e9f3ff;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: larger;
+  width: 10vw;
+  height: 3vw;
+  border: 1px solid black;
+}
+#next:hover {
+  color: #e2fcefff;
+  background-color: aqua;
 }

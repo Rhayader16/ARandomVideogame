@@ -11,7 +11,6 @@ class Game {
     this.timeInterval = null;
     this.categories = ["sciFi", "space", "history"];
     this.gameOver = false;
-    //this.consecAns = 0;
     console.log(this.riddle[this.categories[this.currentLevel]][this.solved]);
   }
 
@@ -28,21 +27,14 @@ class Game {
         this.endGame();
       }
 
-      document.getElementById("timer").textContent = formatTime(this.timer);
+      this.displayTimer();
     }, 1000);
   }
+
   stopTimer() {
     clearInterval(this.timerInterval);
   }
 
-  //   displayRandomRiddle(category) {
-  //     const randomIndex = Math.floor(
-  //       Math.random() * this.riddle[category].length
-  //     );
-  //     const randomRiddle = this.riddle[category][randomIndex];
-  //     this.riddleText.textContent = randomRiddle.riddle;
-  //     this.answer = randomRiddle.answer;
-  //   }
   displayRiddle() {
     const riddle = this.getCurrentRiddle();
     this.riddleText.textContent = riddle.riddle;
@@ -55,12 +47,12 @@ class Game {
       this.riddle[category].sort(() => Math.random() - 0.5);
     }
     console.log(this.riddle);
-  } //shuffles the riddles
+  }
 
   getCurrentRiddle() {
     console.log(this.solved);
     return this.riddle[this.categories[this.currentLevel]][this.solved];
-  } //gives back a riddle
+  }
 
   correctAns(userInput) {
     this.answer = this.getCurrentRiddle().answer;
@@ -72,49 +64,121 @@ class Game {
     ) {
       return true;
     } else return false;
-  } //if you guess right you get a cookie
+  }
 
   nextLevel() {
     this.solved++;
     this.correctAnswer++;
+    const footstepsSound = document.getElementById("footsteps-sound");
+
     if (this.correctAnswer === 9) {
       this.endGame(true);
     } else if (this.correctAnswer % 3 === 0) {
       this.currentLevel++;
       this.solved = 0;
-      //   this.correctAnswer = 0;
+      footstepsSound.play();
+      //this.startTimer();
 
+      // Blocca il timer
+      //this.stopTimer();
       this.timer = 120;
-      clearInterval(this.timerInterval);
-
+      if (this.currentLevel === 1) {
+        document.getElementById("game-container").style.backgroundImage =
+          "url('./spacedoor.jpeg')";
+        const storylineDialog = document.getElementById("storyline");
+        const storylineText = storylineDialog.querySelector("p");
+        storylineText.textContent =
+          "Good job, Connor, you've passed the First Gate. Ahead of you lies Sector R40, be cautious as androids are illegal there. What you're currently in is the Central District, where the seats of power reside, the beating heart of the city. It's been a long time since a non-human has been free to walk where you are now. You see, I'm human, and it's hard for me to fathom the way they're treating you all. Like animals, without rights, first they used you, and now they expect to confine you to one place and watch as others live their lives. The woman I loved was executed right before my eyes for opening the very gate you've just walked through. I won't allow you to suffer the same fate. Come on, get through the security checks and approach the second gate; once you've passed that, you'll be one step closer to freedom!";
+        storylineDialog.showModal();
+        this.stopTimer();
+      } else if (this.currentLevel === 2) {
+        document.getElementById("game-container").style.backgroundImage =
+          "url('./historydoor.jpeg')";
+        const storylineDialog = document.getElementById("storyline");
+        const storylineText = storylineDialog.querySelector("p");
+        storylineText.textContent =
+          "I knew you'd make it. This is Z32, or Silvermoon City, as the citizens call it, named after the beautiful fountain in the Garden of Winged Steeds. You're one step away from freedom.I can't wait to meet you and tell you about our adventures, perhaps by a cozy campfire. The final test awaits you, and in the meantime, I'm sending someone to get you outside the walls. I know you'll succeed. See you soon!";
+        storylineDialog.showModal();
+        this.stopTimer();
+      }
       this.displayRiddle();
-      this.startTimer();
+
+      // Mostra la dialog "storyline"
+      //const storylineDialog = document.getElementById("storyline");
+      //storylineDialog.showModal();
     } else {
       this.displayRiddle();
     }
   }
+
   endGame() {
     const dialog = document.getElementById("dialog");
     if (this.correctAnswer === 9) {
       dialog.querySelector("h2").textContent =
-        "You won, here's a cookie (because the cake is a lie)";
+        "Welcome to our headquarters. I knew I'd see you soon. You've been fantastic! I'm confident that together we can defeat Division 7!";
       this.stopTimer();
     } else {
       this.gameOver = true;
-      dialog.querySelector("h2").textContent = "You lost, GLaDOS got you!";
+      dialog.querySelector("h2").textContent =
+        "I thought you were the Chosen One, but once again, Division 7 has prevailed. I will continue to fight to save the future of androids, even though this has been a tough blow. Farewell, Connor; you've been a great warrior";
       this.stopTimer();
     }
     dialog.showModal();
   }
 
-  theEasterEgg() {} //I'm probably not gonna do this!
+  displayTimer() {
+    const timerElement = document.getElementById("timer");
+    timerElement.textContent = formatTime(this.timer);
+  }
 }
+
 function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
   const formattedMinutes = String(minutes).padStart(2, "0");
   const formattedSeconds = String(remainingSeconds).padStart(2, "0");
   return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+// Funzione per mostrare la domanda corrente
+function showQuestion() {
+  if (currentQuestion < questions.length) {
+    const questionContainer = document.getElementById("question-container");
+    const questionElement = document.getElementById("question");
+    const answerButtons = document.getElementById("answer-buttons");
+
+    questionElement.textContent = questions[currentQuestion].question;
+
+    // Rimuovi le vecchie opzioni di risposta
+    while (answerButtons.firstChild) {
+      answerButtons.removeChild(answerButtons.firstChild);
+    }
+
+    // Aggiungi le nuove opzioni di risposta
+    for (const option in questions[currentQuestion].answers) {
+      const button = document.createElement("button");
+      button.textContent = questions[currentQuestion].answers[option];
+      button.classList.add("btn");
+      button.addEventListener("click", selectAnswer);
+      button.dataset.answer = option;
+      answerButtons.appendChild(button);
+    }
+
+    // Mostra il testo personalizzato nei div specifici
+    if (currentQuestion < 3) {
+      const topRightDiv = document.getElementById("top-right-div");
+      topRightDiv.textContent =
+        "Earth - Year 2466 - Following the Third Industrial Revolution, a single world power has emerged: Division 7. After seizing power with the help of androids, the regime later decided to decommission them. This decision was made because some of these androids, nicknamed 'Dreamers,' began to experience emotions and live among humans. Equipped with organic exoskeletons, it is impossible to distinguish them from humans. Thus, in major cities like New Katonia, a method was devised to prevent them from escaping, confining them and preventing them from organizing on a global scale. The cities have three gates for exit, each with questions to answer. Android minds do not retain information about human culture, so a simple quiz is enough to keep them imprisoned. You are Connor, a T-800 model android. You have been contacted by the rebellion, which has managed to establish an outpost just outside the borders of New Katonia. Through neural connection, Luke, a rebel, will guide you to freedom. Good luck...";
+    } else if (currentQuestion < 6) {
+      const topRightDiv = document.getElementById("top-right-div");
+      topRightDiv.textContent =
+        "Good job, Connor, you've passed the First Gate. Ahead of you lies Sector R40, be cautious as androids are illegal there. What you're currently in is the Central District, where the seats of power reside, the beating heart of the city. It's been a long time since a non-human has been free to walk where you are now. You see, I'm human, and it's hard for me to fathom the way they're treating you all. Like animals, without rights, first they used you, and now they expect to confine you to one place and watch as others live their lives. The woman I loved was executed right before my eyes for opening the very gate you've just walked through. I won't allow you to suffer the same fate. Come on, get through the security checks and approach the second gate; once you've passed that, you'll be one step closer to freedom!";
+    } else {
+      const topRightDiv = document.getElementById("top-right-div");
+      topRightDiv.textContent =
+        "I knew you'd make it. This is Z32, or Silvermoon City, as the citizens call it, named after the beautiful fountain in the Garden of Winged Steeds. You're one step away from freedom. I can't wait to meet you and tell you about our adventures, perhaps by a cozy campfire. The final test awaits you, and in the meantime, I'm sending someone to get you outside the walls. I know you'll succeed. See you soon!";
+    }
+  }
 }
 
 export default Game;
