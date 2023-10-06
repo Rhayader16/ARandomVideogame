@@ -231,11 +231,7 @@ submitButton.addEventListener("click", () => {
     game.nextLevel();
     submitText.value = "";
   } else {
-    const dialog = document.getElementById("dialog");
-    game.gameOver = true;
-    dialog.querySelector("h2").textContent =
-      "I thought you were the Chosen One, but once again, Division 7 has prevailed. I will continue to fight to save the future of androids, even though this has been a tough blow. Farewell, Connor; you've been a great warrior";
-    game.stopTimer();
+    game.endGame();
   }
 });
 
